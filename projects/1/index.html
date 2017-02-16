@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Police Station</title>
+        <style>
+            body {
+                background-color:black;
+            }
+            p, h1 {font-family: helvetica; color: white;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 80px; color: red;}
+            pre {font-size: 2em;}
+            div { border: 10px solid black; margin: 10px; border-radius: 10px; background-color: #ededed}
+
+            
+        </style>
+    </head>
+    <body>
+    <h1>Police Stations</h1>
+    
+    
+    
+     <div><p style="margin-bottom:3px"><a href="https://data.cityofchicago.org/Public-Safety/Police-Stations-Map/gkur-vufi" target="_blank" style="font-size:12px;font-weight:bold;text-decoration:none;color:#333333;font-family:arial;">Police Stations - Map</a></p><iframe width="620px" title="Police Stations - Map" height="620px" src="https://data.cityofchicago.org/w/gkur-vufi/3q3f-6823?cur=78d5rgYxmEK&from=root" frameborder="0"scrolling="no"><a href="https://data.cityofchicago.org/Public-Safety/Police-Stations-Map/gkur-vufi" title="Police Stations - Map" target="_blank">Police Stations - Map</a></iframe></div>
+    <input type="text" id='input' name="search" placeholder="Enter search term">
+<button id='submit'>Submit</button>
+
+<script src="https://data.cityofchicago.org/resource/9rg7-mz9y.json"></script>
+<style type="text/css">
+div
+#googleMap { margin: 0 auto 0 auto;}
+</style>
+
+<div id="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgB0hf4dV-1cK0rE9XNW3Dhukda437gMI&libraries=places"></div>
+    <script>    
+    
+    $('#submit').click(function(){
+var baseURL = 'https://data.cityofchicago.org/resource/ygr5-vcbg.json';
+    
+    var map;
+    var service;
+    var infowindow;
+    
+    function initialize() {
+    var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: pyrmont,
+    zoom: 15
+    });
+
+  var request = {
+    location: pyrmont,
+    radius: '400',
+    types: ['store']
+  };
+//{
+ // service = new google.maps.places.PlacesService(map);
+ // service.nearbySearch(request, callback);
+//}
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      createMarker(results[i]);
+    }
+  }
+}
+</script>
+    
+    <script>
+
+        var baseURL = 'https://data.cityofchicago.org/resource/9rg7-mz9y.json';
+        
+        // optional filters we're appending - status
+        var filters = 'ew google.maps.places.PlacesService(map)';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+
+                    // loop through the records
+                    
+                   $("body").append(html);
+                   
+                });
+    
+    
+                    
+                })
+           
+ 
+            
+        )
+        
+        
+  </script>
+    </body>
+</html>        
