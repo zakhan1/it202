@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTA BusTracker</title>
+  <style>
+body {
+    background-color: turquoise;
+}
+
+h1 {
+  color: 
+}
+
+     div { border: 10px solid black; margin: 1px; border-radius: 9px;}
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+      <h1>CTA Bus Tracker</h1>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+      
+    /* <style>
+         p, h1 {font-family: helvetica;}
+         p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+         pre {font-size: 2em;}
+         div { border: 10px solid black; margin: 4px; border-radius: 5px; background-color: orange}
+         body {background-color:skyblue;}
+      </style> */
+      
+
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          //var findBus = $("find").val();
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "g5JMu4Z53Rr6nGCY2c4fkdS3M",
+                      "stpid" : "8417",
+                      "format":"json"}
+            }).done (function (data) {
+              console.log(data);
+          
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                 var html = "<div>" + 
+                 "<p>Stop ID: " + v.stpid + "</p>" +
+                 "<p>Route: " + v.rt + "</p>" +
+                 "<p>Bus Stop: " + v.stpnm + "</p>" +
+                 "<p>Direction: " + v.rtdir + "</p>" +
+                 "<p>To: " + v.des + "<p>" +
+                 "<p>Arrives in: " + v.prdctdn + " MINUTES</p>" +
+                 "</div>"
+                 
+                 $("body").append(html);
+                 
+                 i
+                
+              })
+      
+
+            });
+        });
+            
+   
+</script>
+ 
+</body>
+</html>
