@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Potholes</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            div { border: 3px solid black; margin: 4px; border-radius: 5px; background-color: #ededed}
+            hr {width:100%;}
+             .template {display: none;}
+        </style>
+    </head>
+    <body>
+    <h1>Potholes</h1>
+    
+    <div class="template potholes">
+        <h1 class="serviceType"></h1>
+        <p>
+            Service Request Number: <span class="number"></span><br>
+            Status: <soan class="status"></soan>
+        </p>
+    </div>
+    
+    <div id="results">
+        
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        /*
+            This script retrieves 311 pot hole service request data for 
+            from the 
+            City of Chicago Data Portal
+            
+            This script doesn't update the DOM.
+
+        */
+        
+        // base URL to the food inspections data
+        var baseURL = 'https://data.cityofchicago.org/resource/787j-mys9.json';
+        
+        // optional filters we're appending - status
+        var filters = '';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+                var clone;
+                    // loop through the records
+                    
+                    $.each(data, function(index, value){
+                        
+                        clone = $(".template").clone();
+                        clone.removeClass("template");
+                        clone.find(".serviceType").text(value.type_of_service_request);
+                        clone.find(".number").text(value.service_request_number);
+                        clone.find(".status").text(value.status);
+                        
+                        $("#results").append(clone);
+                        
+                      var html = "<div><h1>Status: " + value.status + "<hr>" + "</h1>" + 
+                      "<h1>Type of Service Request: " + value.type_of_service_request + "<hr>" +"</h1>" +
+                      "<h1>Street Address: " + value.street_address + "<hr>" + "</h1>" + 
+                      "<h1>Zip: " + value.zip + "<hr>" + "</h1>" + 
+                      "<h1>Police District :"+ value.police_district + "<hr>" + "</h1>" + "</div>" + "<hr>";
+                                    
+                    //    $("body").append(html); 
+                   });
+                })
+            
+            
+        )
+        
+        
+    </script>
+    </body>
+</html>
