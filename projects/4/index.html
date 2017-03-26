@@ -19,44 +19,193 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Title</span>
+          <span class="mdl-layout-title"> Recent Crimes In Chicago</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="#">Link</a>
-            <a class="mdl-navigation__link" href="#">Link</a>
-            <a class="mdl-navigation__link" href="#">Link</a>
-            <a class="mdl-navigation__link" href="#">Link</a>
+            <a id="link1" class="mdl-navigation__link" href="#">Recent Crimes in Chicago</a>
+            <a id="link2" class="mdl-navigation__link" href="#">Speed Camera Violations in Chicago</a>
+            <a id="link3" class="mdl-navigation__link" href="#">Recent Red Light Camera Violations</a>
           </nav>
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">Topic</span>
         <nav class="mdl-navigation">
-          <a id="link1" class="mdl-navigation__link" href="#">Link</a>
-          <a id="link2" class="mdl-navigation__link" href="#">Link</a>
-          <a id="link3" class="mdl-navigation__link" href="#">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+          <a id="link1" class="mdl-navigation__link" href="#">Recent Crimes in Chicago</a>
+          <a id="link2" class="mdl-navigation__link" href="#">Speed Camera Violations in Chicago</a>
+          <a id="link3" class="mdl-navigation__link" href="#">Recent Red Light Camera Violations</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
-        <div id="screen1" class="screen page-content">Screen 1</div>
-        <div id="screen2" class="screen page-content">Screen 2</div>
-        <div id="screen3" class="screen page-content">Screen 3</div>
+        
+        
+        <div id="screen1" class="screen page-content">
+            
+           <style>
+           
+        </style>
+          
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          <script>
+            
+           var baseURL = 'https://data.cityofchicago.org/resource/d62x-nvdr.json';
+           
+              // optional filters we're appending - status
+        var filters = '';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+
+                    // loop through the records
+                    
+                    $.each(data, function(index, value){
+                      var html = "<div><h5>Date: " + value.date + "<hr>" + "</h5>" + 
+                      "<h5>Block: " + value.block + "<hr>" +"</h5>" +
+                      "<h5>Primary Type: " + value.primary_type + "<hr>" + "</h5>" + 
+                      "<h5>Description: " + value.description + "<hr>" + "</h5>" + 
+                      "<h5>Location Description:"+ value.location_description + "<hr>" + "</h5>" + "</div>" + "<hr>";
+                                    
+                        $("body").append(html);
+                   });
+                })
+            
+            
+        );
+        
+            
+          </script>
+        </div>
+        
+        <div id="screen2" class="screen page-content">
+               <style>
+           
+        </style>
+          
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          <script>
+            
+           var baseURL = 'https://data.cityofchicago.org/resource/3v4z-xnbf.json';
+           
+              // optional filters we're appending - status
+        var filters = '';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+
+                    // loop through the records
+                    
+                    $.each(data, function(index, value){
+                      var html = "<div><h5>Address: " + value.address + "<hr>" + "</h5>" + 
+                      "<h5>Violation Date: " + value.violation_date + "<hr>" +"</h5>" +
+                      "<h5>Violations: " + value.violations + "<hr>" + "</div>" + "<hr>";
+                                    
+                        $("body").append(html);
+                   });
+                })
+            
+            
+        );
+          </div>
+          
+        <div id="screen3" class="screen page-content">
+          
+          
+            
+           <style>
+           
+        </style>
+          
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          <script>
+            
+           var baseURL = 'https://data.cityofchicago.org/resource/twfh-866z.json';
+           
+              // optional filters we're appending - status
+        var filters = '';
+        
+        // full URL
+        var url = baseURL + filters;
+        
+        console.log (url);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(url)
+                .done (function (data) {
+                    // TODO:  add script to add data to the DOM
+                    console.log(data);
+
+                    // loop through the records
+                    
+                    $.each(data, function(index, value){
+                      var html = "<div><h5>Intersection: " + value.intersection + "<hr>" + "</h5>" + 
+                      "<h5>Address: " + value.address + "<hr>" +"</h5>" +
+                      "<h5>Violation Date: " + value.violation_date + "<hr>" + "</h5>" + 
+                      "<h5>Violations: " + value.violations + "<hr>" + "</h5>" + 
+                      "<hr>" + "</h5>" + "</div>";
+                                    
+                        $("body").append(html);
+                   });
+                })
+            
+            
+        );
+        
+          
+          
+          </div>
+          
       </main>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <script>
-        $(function(){
-            $("#screen1").show();
-            
-            $("#link1").on("click", function(){
-                $(".screen").hide();
-                $("#screen1").show();
-            })
-        })
-    </script>
     
+     $(function(){
+                $("#screen1").show(); 
+           
+           //Screen 1 Code
+           $("#link1").on("click", function(){
+               $(".screen").hide();
+               $("#screen1").show();
+           });
+           
+           //Screen 2 Code
+           $("#link2").on("click", function(){
+               $(".screen").hide();
+               $("#screen2").show();
+           });
+           
+           //Screen 3 Code
+           $("#link3").on("click", function(){
+               $(".screen").hide();
+               $("#screen3").show();
+           });
+        });
+        
+    </script>
   </body>
 </html>
