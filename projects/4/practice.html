@@ -89,100 +89,13 @@
         </div>
         
         <div id="screen2" class="screen page-content">
-               <style>
-           
-        </style>
-          
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-          <script>
-            
-           var baseURL = 'https://data.cityofchicago.org/resource/3v4z-xnbf.json';
-           
-              // optional filters we're appending - status
-        var filters = '';
-        
-        // full URL
-        var url = baseURL + filters;
-        
-        console.log (url);
-        
-        $(
-            // jQuery command to retrieve json data
-            
-            $.getJSON(url)
-                .done (function (data) {
-                    // TODO:  add script to add data to the DOM
-                    console.log(data);
-
-                    // loop through the records
-                    
-                    $.each(data, function(index, value){
-                      var html = "<div><h5>Address: " + value.address + "<hr>" + "</h5>" + 
-                      "<h5>Violation Date: " + value.violation_date + "<hr>" +"</h5>" +
-                      "<h5>Violations: " + value.violations + "<hr>" + "</div>" + "<hr>";
-                                    
-                        $("body").append(html);
-                   });
-                })
-            
-            
-        );
+            screen 2
           </div>
           
         <div id="screen3" class="screen page-content">
           
-          
-            
-           <style>
-           
-        </style>
-          
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-          <script>
-            
-           var baseURL = 'https://data.cityofchicago.org/resource/twfh-866z.json';
-           
-              // optional filters we're appending - status
-        var filters = '';
-        
-        // full URL
-        var url = baseURL + filters;
-        
-        console.log (url);
-        
-        $(
-            // jQuery command to retrieve json data
-            
-            $.getJSON(url)
-                .done (function (data) {
-                    // TODO:  add script to add data to the DOM
-                    console.log(data);
-
-                    // loop through the records
-                    
-                    $.each(data, function(index, value){
-                      var html = "<div><h5>Intersection: " + value.intersection + "<hr>" + "</h5>" + 
-                      "<h5>Address: " + value.address + "<hr>" +"</h5>" +
-                      "<h5>Violation Date: " + value.violation_date + "<hr>" + "</h5>" + 
-                      "<h5>Violations: " + value.violations + "<hr>" + "</h5>" + 
-                      "<hr>" + "</h5>" + "</div>";
-                                    
-                        $("body").append(html);
-                   });
-                })
-            
-            
-        );
-        
-          
-          
-          </div>
-          
-      </main>
-    </div>
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+       screen 3
+       
     <script>
     
      $(function(){
