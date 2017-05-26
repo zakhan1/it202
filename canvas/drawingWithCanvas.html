@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas</title>
+    
+     <style>
+    canvas {
+      border: #333 10px solid;
+    }
+  </style>
+  
+</head>
+<canvas id="myCanvas" width="550px" height="350px"></canvas>
+
+<script>
+    var canvas = document.querySelector("#myCanvas");
+    var context = canvas.getContext("2d");
+    
+    // draw a diagonal line
+context.moveTo(90, 150);
+context.lineTo(200, 10);
+context.moveTo(200, 10);
+context.lineTo(300, 150);
+context.moveTo(300, 150);
+context.lineTo(90, 150);
+context.moveTo(90, 150);
+context.lineTo(90, 300);
+context.moveTo(90, 300);
+context.lineTo(300, 300);
+context.lineTo(300, 150);
+context.fillStyle = "#A0522D";
+// close the path
+context.closePath();
+ 
+// specify what our line looks like
+context.lineWidth = 10;
+context.strokeStyle = "steelblue";
+ 
+// get the line drawn to the canvas
+context.stroke();
+    
+</script>
+
+<body>
+ 
+</body>
+ 
+</html>
