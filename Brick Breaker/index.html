@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Brick Breaker</title>
+  <style>
+    canvas {
+      border: #333 10px solid;
+      background: #eee;
+    }
+  </style>
+ 
+</head>
+ 
+<body>
+   <canvas id = "myCanvas" width = "750px" height = "600px"></canvas>
+        
+  <script>
+        
+        
+            //Canvas Variables
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            var x = canvas.width / 2;
+            var y = canvas.height - 30;
+            var dx = 2;
+            var dy = -2;
+    
+            //Ball Variables
+            var ballRadius = 10;
+            var ballColor = "red";
+    
+            //Paddle Variables
+            var paddleHeight = 10;
+            var paddleWidth = 150;
+            var paddleX = (canvas.width - paddleWidth) / 2;
+    
+            //Game Controls Variables
+            var rightPressed = false;
+            var leftPressed = false;
+    
+            //Bricks Variables
+            var brickRowCount = 8;
+            var brickColumnCount = 8;
+            var brickWidth = 75;
+            var brickHeight = 20;
+            var brickPadding = 10;
+            var brickOffsetTop = 30;
+            var brickOffsetLeft = 30;
+            var bricks = [];
+            for (var c = 0; c < brickColumnCount; c++) {
+                bricks[c] = [];
+                for (var r = 0; r < brickRowCount; r++) {
+                    bricks[c][r] = {
+                        x: 0,
+                        y: 0,
+                        status: 1
+                    };
+                }
+            }
+            
+            //Other Variables
+            var gameScore = 0;
+            
+            //(x,y) coordinates for the ball in console
+            console.log(x + " " + y);
+    
+            //Drawing Ball Function: Red Circle
+            function drawBall() {
+                ctx.beginPath();
+                ctx.arc(x, y, ballRadius, 0, Math.PI * 2, false);
+                ctx.fillStyle = ballColor;
+                ctx.fill();
+                ctx.closePath();
+            }
+    
+            //Drawing Bricks Function
+            function drawBricks() {
+                for (var c = 0; c < brickColumnCount; c++) {
+                    for (var r = 0; r < brickRowCount; r++) {
+                        if (bricks[c][r].status == 1) {
+                            var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                            var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                            bricks[c][r].x = brickX;
+                            bricks[c][r].y = brickY;
+                            ctx.beginPath();
+                            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                            ctx.fillStyle = "red";
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+    
+            //Drawing Paddle Function
+            function drawPaddle() {
+                ctx.beginPath();
+                ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+                ctx.fillStyle = "black";
+                ctx.fill();
+                ctx.closePath();
+            }
+    
+            //Collision Detection Function
+            function collisionDetection() {
+                for (var c = 0; c < brickColumnCount; c++) {
+                    for (var r = 0; r < brickColumnCount; r++) {
+                        var b = bricks[c][r];
+                        //Calculations
+                        if (b.status == 1) {
+                            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                                dy = -dy;
+                                b.status = 0;
+                                gameScore++;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //Drawing Score Function
+            function drawScore() {
+                ctx.font = "16px Georgia";
+                ctx.fillStyle = "green";
+                ctx.fillText("Score: " + gameScore, 8, 20);
+            } 
+                                                          
+            //Moving Circle Function
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBricks();
+                drawBall();
+                drawPaddle();
+                collisionDetection();
+                drawScore();
+                x += dx;
+                y += dy;
+    
+                if (y + dy < ballRadius) {
+                    dy = -dy;
+                }
+                else if (y + dy > canvas.height - ballRadius) {
+                    if (x > paddleX && x < paddleX + paddleWidth) {
+                        dy = -dy;
+                    }
+                    else {
+                        "GAME OVER";
+                    }
+                }
+    
+    
+                if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                    dx = -dx;
+                    ballColor = "blue";
+                }
+    
+                //Paddle Movement
+                if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                    paddleX += 3;
+                }
+                else if (leftPressed && paddleX > 0) {
+                    paddleX -= 3;
+                }
+    
+            }
+
+    
+            //Event Listeners for Paddle Movement
+        document.addEventListener("keydown", keyDownHandler, false);
+    
+            document.addEventListener("keyup", keyUpHandler, false);
+    
+    
+            //Right Function
+                      function keyDownHandler(e) {
+                if (e.keyCode == 39) {
+                    rightPressed = true;
+                }
+                else if (e.keyCode == 37) {
+                    leftPressed = true;
+                }
+            }
+    
+            //Left Function
+            function keyUpHandler(e) {
+                if (e.keyCode == 39) {
+                    rightPressed = false;
+                }
+                else if (e.keyCode == 37) {
+                    leftPressed = false;
+                }
+            }
+    
+            //Drawing/Speed of the ball
+                      setInterval(draw, 5);
+            
+            
+        </script>
+    
+</body>
+ 
+</html>
